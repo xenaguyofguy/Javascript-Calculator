@@ -1,0 +1,110 @@
+<html>
+<head>
+
+
+</head>
+
+<body> 
+
+<link rel="stylesheet" href="calculator.css">
+
+
+<div id="calculator">
+
+
+<input id="display" readonly>
+
+
+<div id="keys">
+
+    <button onclick="appendToDisplay('+')" class="operator-btn" >+</button>
+    <button onclick="appendToDisplay('1')">1</button>
+<button onclick="appendToDisplay('2')">2</button>
+<button onclick="appendToDisplay('3')">3</button>
+<button onclick="appendToDisplay('*')" class="operator-btn" >*</button>
+<button onclick="appendToDisplay('4')">4</button>
+<button onclick="appendToDisplay('5')">5</button>
+<button onclick="appendToDisplay('6')">6</button>
+<button onclick="appendToDisplay('-')" class="operator-btn" >-</button>
+<button onclick="appendToDisplay('7')">7</button>
+<button onclick="appendToDisplay('8')">8</button>
+<button onclick="appendToDisplay('9')">9</button>
+<button onclick="appendToDisplay('/')" class="operator-btn" >/</button>
+<button onclick="appendToDisplay('0')">0</button>
+<button onclick="calculate('')" class="operator-imp" >=</button>
+<button onclick="clearDisplay('')" class="operator-imp" >C</button>
+<button onclick="appendToDisplay('.')" class="operator-btn" >.</button>
+
+</div>
+
+
+</div>
+
+<script>
+    const display = document.getElementById("display");
+
+//Shows inputs in display    
+function appendToDisplay(input){
+    display.value += input;
+
+
+}
+
+//Clears display. Duh
+function clearDisplay(){
+    display.value = "";
+    
+}
+
+//The calculator itself
+function calculate(){
+//Try and catch values for any errors
+    try {
+    display.value = eval(display.value);
+}
+catch (e) {
+    display.value = "Error";
+}
+
+}
+//Key listener, framework for the keyboard function
+//Silly old me forgot to put this in first and did it last
+document.addEventListener('keydown', function(event) {
+    const key = event.key;
+
+//Numbers
+    if (key >= '0' && key <= '9') {
+    appendToDisplay(key);
+}
+
+//Operators
+else if (key === '+' || key === '-' || key === '*' || key === '/') {
+    appendToDisplay(key);
+}
+
+//Binding Enter to calculate? How kind!
+else if (key === 'Enter' || key === '=') {
+    calculate();
+}
+
+//Clearing
+else if (key === 'C' || key === 'Backspace') {
+    clearDisplay();
+}
+
+//Decimals
+else if (key === '.') {
+    appendToDisplay('.');
+}
+
+});
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
